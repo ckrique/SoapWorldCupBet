@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="WorldCupBetService">
+	<description>
+		Simple implementation of a Bet Application.
+	</description>
+
+	<parameter name="ServiceClass">br.com.worldcupbet.soapworldcupbet.services.WorldCupBetService</parameter>
+
+	<operation name="addBet" mep="http://www.w3.org/ns/wsdl/in-out"	namespace="http://services.soapworldcupbet.worldcupbet.com.br/xsd">
+		<actionMapping>http://services.soapworldcupbet.worldcupbet.com.br/xsd/addBet</actionMapping>
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+	</operation>
+
+	<operation name="delete" mep="http://www.w3.org/ns/wsdl/in-out"	namespace="http://services.soapworldcupbet.worldcupbet.com.br/xsd">
+		<actionMapping>http://services.soapworldcupbet.worldcupbet.com.br/xsd/delete</actionMapping>
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+	</operation>
+
+	<operation name="updateBet"	mep="http://www.w3.org/ns/wsdl/in-out"
+		namespace="http://services.soapworldcupbet.worldcupbet.com.br/xsd">
+		<actionMapping>http://services.soapworldcupbet.worldcupbet.com.br/xsd/updateBet</actionMapping>
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+	</operation>
+
+	<operation name="getBets" mep="http://www.w3.org/ns/wsdl/in-out"
+		namespace="http://services.soapworldcupbet.worldcupbet.com.br/xsd">
+		<actionMapping>http://services.soapworldcupbet.worldcupbet.com.br/xsd/getBets</actionMapping>
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+	</operation>
+
+	<operation name="getByPunterName" mep="http://www.w3.org/ns/wsdl/in-out"
+		namespace="http://services.soapworldcupbet.worldcupbet.com.br/xsd">
+		<actionMapping>http://services.soapworldcupbet.worldcupbet.com.br/xsd/getByPunterName</actionMapping>
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+	</operation>
+
+</service> 

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://services.soapworldcupbet.worldcupbet.com.br" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax21="http://services.soapworldcupbet.worldcupbet.com.br/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" targetNamespace="http://services.soapworldcupbet.worldcupbet.com.br">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services.soapworldcupbet.worldcupbet.com.br/xsd">
+            <xs:complexType name="Bet">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="betValue" type="xs:double"/>
+                    <xs:element minOccurs="0" name="punterName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="teamOnWhichBet" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax22="http://services.soapworldcupbet.worldcupbet.com.br/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services.soapworldcupbet.worldcupbet.com.br">
+            <xs:import namespace="http://services.soapworldcupbet.worldcupbet.com.br/xsd"/>
+            <xs:element name="updateBet">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="bet" nillable="true" type="ax22:Bet"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getByPunterName">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="punterName" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getByPunterNameResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax22:Bet"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBets">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBetsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:Bet"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="WorldCupBetServiceException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="WorldCupBetServiceException" nillable="true" type="ns:Exception"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="Exception">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="delete">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="punterName" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addBet">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="bet" nillable="true" type="ax22:Bet"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getBetsRequest">
+        <wsdl:part name="parameters" element="ns:getBets"/>
+    </wsdl:message>
+    <wsdl:message name="getBetsResponse">
+        <wsdl:part name="parameters" element="ns:getBetsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addBetRequest">
+        <wsdl:part name="parameters" element="ns:addBet"/>
+    </wsdl:message>
+    <wsdl:message name="updateBetRequest">
+        <wsdl:part name="parameters" element="ns:updateBet"/>
+    </wsdl:message>
+    <wsdl:message name="deleteRequest">
+        <wsdl:part name="parameters" element="ns:delete"/>
+    </wsdl:message>
+    <wsdl:message name="WorldCupBetServiceException">
+        <wsdl:part name="parameters" element="ns:WorldCupBetServiceException"/>
+    </wsdl:message>
+    <wsdl:message name="getByPunterNameRequest">
+        <wsdl:part name="parameters" element="ns:getByPunterName"/>
+    </wsdl:message>
+    <wsdl:message name="getByPunterNameResponse">
+        <wsdl:part name="parameters" element="ns:getByPunterNameResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="WorldCupBetServicePortType">
+        <wsdl:operation name="getBets">
+            <wsdl:input message="ns:getBetsRequest" wsaw:Action="urn:getBets"/>
+            <wsdl:output message="ns:getBetsResponse" wsaw:Action="urn:getBetsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addBet">
+            <wsdl:input message="ns:addBetRequest" wsaw:Action="urn:addBet"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateBet">
+            <wsdl:input message="ns:updateBetRequest" wsaw:Action="urn:updateBet"/>
+        </wsdl:operation>
+        <wsdl:operation name="delete">
+            <wsdl:input message="ns:deleteRequest" wsaw:Action="urn:delete"/>
+            <wsdl:output message="ns:null" wsaw:Action="urn:deleteResponse"/>
+            <wsdl:fault message="ns:WorldCupBetServiceException" name="WorldCupBetServiceException" wsaw:Action="urn:deleteWorldCupBetServiceException"/>
+        </wsdl:operation>
+        <wsdl:operation name="getByPunterName">
+            <wsdl:input message="ns:getByPunterNameRequest" wsaw:Action="urn:getByPunterName"/>
+            <wsdl:output message="ns:getByPunterNameResponse" wsaw:Action="urn:getByPunterNameResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WorldCupBetServiceSoap11Binding" type="ns:WorldCupBetServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getBets">
+            <soap:operation soapAction="urn:getBets" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addBet">
+            <soap:operation soapAction="urn:addBet" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="updateBet">
+            <soap:operation soapAction="urn:updateBet" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="delete">
+            <soap:operation soapAction="urn:delete" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="WorldCupBetServiceException">
+                <soap:fault use="literal" name="WorldCupBetServiceException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getByPunterName">
+            <soap:operation soapAction="urn:getByPunterName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WorldCupBetServiceSoap12Binding" type="ns:WorldCupBetServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getBets">
+            <soap12:operation soapAction="urn:getBets" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addBet">
+            <soap12:operation soapAction="urn:addBet" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="updateBet">
+            <soap12:operation soapAction="urn:updateBet" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="delete">
+            <soap12:operation soapAction="urn:delete" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="WorldCupBetServiceException">
+                <soap12:fault use="literal" name="WorldCupBetServiceException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getByPunterName">
+            <soap12:operation soapAction="urn:getByPunterName" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="WorldCupBetServiceHttpBinding" type="ns:WorldCupBetServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getBets">
+            <http:operation location="getBets"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addBet">
+            <http:operation location="addBet"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="updateBet">
+            <http:operation location="updateBet"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="delete">
+            <http:operation location="delete"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="WorldCupBetServiceException"/>
+        </wsdl:operation>
+        <wsdl:operation name="getByPunterName">
+            <http:operation location="getByPunterName"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WorldCupBetService">
+        <wsdl:port name="WorldCupBetServiceHttpSoap11Endpoint" binding="ns:WorldCupBetServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/WorldCupBetService"/>
+        </wsdl:port>
+        <wsdl:port name="WorldCupBetServiceHttpSoap12Endpoint" binding="ns:WorldCupBetServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/WorldCupBetService"/>
+        </wsdl:port>
+        <wsdl:port name="WorldCupBetServiceHttpEndpoint" binding="ns:WorldCupBetServiceHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/WorldCupBetService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
