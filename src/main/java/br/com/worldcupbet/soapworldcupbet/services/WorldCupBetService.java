@@ -45,7 +45,7 @@ public class WorldCupBetService {
 		
 		return bet;
 	}
-	//Se não funcionar remover lançamento de exception
+	
 	public void addBet(Bet bet){		
 		System.out.println("{addHighScore} Adding: ["+bet.getPunterName()+"'s Bet]");
 		for (Bet b : betList) {
